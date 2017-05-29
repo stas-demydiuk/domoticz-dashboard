@@ -21,8 +21,12 @@ function getDeviceValue(device) {
         }
     }
 
-    if (device.Data.indexOf('Set Level') !== -1) {
+    if (device.Type === 'Light/Switch' && device.SwitchType === 'Dimmer') {
         return device.Level;
+    }
+
+    if (device.SubType === 'kWh') {
+        return device.Usage;
     }
 
     return device.Data;

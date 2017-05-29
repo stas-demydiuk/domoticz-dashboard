@@ -11,7 +11,8 @@ import BinaryState from '../widgets/BinaryState'
 import ClimateState from "../widgets/ClimateState";
 import ColorControl from "../widgets/ColorControl";
 import Dimmer from "../widgets/Dimmer";
-
+import Counter from "../widgets/Counter";
+import AddWidget from "../AddWidget";
 
 const mapStateToProps = (state) => {
     return {
@@ -75,16 +76,24 @@ class Container extends React.Component {
                 case widgetTypes.climate:
                     return device ? <ClimateState device={device} config={item}/> : null;
                 case widgetTypes.color:
-                    return device ? <ColorControl device={device} config={item} onChange={this.onColorSet.bind(this, device)}/> : null;
+                    return device ? <ColorControl device={device} config={item}
+                                                  onChange={this.onColorSet.bind(this, device)}/> : null;
+                case widgetTypes.counter:
+                    return device ? <Counter device={device} config={item}/> : null;
                 case widgetTypes.dimmer:
-                    return device ? <Dimmer device={device} config={item} onChange={this.onLevelSet.bind(this, device)} /> : null;
+                    return device ?
+                        <Dimmer device={device} config={item} onChange={this.onLevelSet.bind(this, device)}/> : null;
                 default:
                     return null
             }
         };
 
         const layout = config.map((item, idx) => {
-            return {...item.layout, i: idx.toString()}
+            let baseConfig = {...item.layout, i: idx.toString()};
+
+            return this.props.editMode
+                ? {...baseConfig, static: false}
+                : {...baseConfig, static: true}
         });
 
         const layouts = {
@@ -100,16 +109,21 @@ class Container extends React.Component {
         });
 
         return (
-            <DevicesGrid layouts={layouts} onDeviceClick={this.onSwitchClick}>
-                {widgets}
-            </DevicesGrid>
+            <div>
+                <DevicesGrid layouts={layouts}>
+                    {widgets}
+                </DevicesGrid>
+
+                {this.props.editMode ? <AddWidget/> : null}
+            </div>
         )
     }
 }
 
 Container.propTypes = {
     devices: PropTypes.array.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    editMode: PropTypes.bool
 };
 
 export default connect(mapStateToProps)(Container);
