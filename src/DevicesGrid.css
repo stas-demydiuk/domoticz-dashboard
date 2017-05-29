@@ -1,0 +1,131 @@
+body {
+    background-color: #222;
+}
+
+.widget {
+    box-sizing: border-box;
+    text-align: center;
+    padding: 6px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(34, 34, 34, 0.9);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.widget-default {
+    background-color: #444
+}
+
+.widget-primary {
+    background-color: #456A90;
+}
+
+.widget-binary-state.active i {
+    /*color: #AAFF00;*/
+}
+
+.widget h1 {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    min-height: 32px;
+    margin-top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget .widget-value {
+    color: #888;
+    font-size: 36px;
+    line-height: 1;
+    margin: 0;
+}
+
+.widget .widget-value > .units {
+    font-size: 18px;
+    vertical-align: super;
+}
+
+.widget.active .widget-value {
+    color: rgb(255, 255, 255);
+}
+
+.widget-climate .values {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: row;
+    color: #FFF;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.widget-climate .value + .value {
+    padding-left: 18px;
+}
+
+.widget-climate .value.humidity {
+    font-size: 24px;
+}
+
+.widget-climate .value.temperature .units {
+    font-size: 18px;
+    vertical-align: super;
+}
+
+.widget-climate .value.humidity .units {
+    font-size: 12px;
+    vertical-align: super;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+     position: absolute;
+     top: 40px;
+     left: 40px;
+     right: 40px;
+     bottom: 40px;
+     background-color: #222;
+ }
+
+.modal-color-picker {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 380px;
+    margin-left: -200px;
+    margin-top: -100px;
+    padding: 10px 0 10px 10px;
+    background-color: #222;
+    box-sizing: border-box;
+}
+
+.modal-color-picker .hue-picker {
+    box-sizing: border-box;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}
+
+.widget .rc-slider-rail {
+    background-color: #888;
+}
+
+.widget .rc-slider-track {
+    background-color: #FFF;
+}
+
+.widget .rc-slider-handle {
+    border-color: #888;
+}
