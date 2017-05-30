@@ -6,12 +6,12 @@ export default function Switch(props) {
     const state = device.value.toLocaleLowerCase();
 
     return (
-        <div onClick={props.onClick} role="button" tabIndex="0">
+        <button className="btn" onClick={props.onClick}>
             <h1>{ device.label }</h1>
             <h2 className="widget-value">
-                <i className={'fa fa-toggle-' + state} aria-hidden="true"></i>
+                <i className={`fa fa-toggle-${state}`} aria-hidden="true" />
             </h2>
-        </div>
+        </button>
     );
 }
 

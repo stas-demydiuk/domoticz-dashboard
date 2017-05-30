@@ -41,7 +41,7 @@ export default class ColorControl extends React.Component {
 
     render() {
         return (
-            <div onClick={this.handleOpenModal} role="button" tabIndex="0">
+            <button className="btn" onClick={this.handleOpenModal}>
                 <h1>{ this.props.device.label }</h1>
                 <h2 className="widget-value">
                     <i className="fa fa-lightbulb-o" aria-hidden="true" style={{ color: this.state.color }} />
@@ -64,7 +64,7 @@ export default class ColorControl extends React.Component {
 
                     <HuePicker color={this.state.color} width="360px" onChangeComplete={this.setColor} />
                 </ReactModal>
-            </div>
+            </button>
         );
     }
 }

@@ -14,6 +14,7 @@ import Dimmer from '../widgets/Dimmer';
 import Counter from '../widgets/Counter';
 import AddWidget from '../AddWidget';
 import Widget from '../widgets/Widget';
+import Header from './Header';
 
 const mapStateToProps = state => ({
     dashboard: state.dashboard,
@@ -21,6 +22,12 @@ const mapStateToProps = state => ({
 });
 
 class Container extends React.Component {
+    constructor() {
+        super();
+
+        this.state = { editMode: false };
+    }
+
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(fetchDevices());
@@ -33,6 +40,10 @@ class Container extends React.Component {
     componentWillUnmount() {
         clearInterval(this.timerId);
     }
+
+    toggleEditMode = () => {
+        this.setState({ editMode: !this.state.editMode });
+    };
 
     onSwitchClick = (device) => {
         const { dispatch } = this.props;
@@ -128,8 +139,9 @@ class Container extends React.Component {
                         type={item.type.toLowerCase()}
                         style={item.style}
                         isActive={device ? device.isActive : false}
-                        isEdit={this.props.editMode}
-                        onRemove={this.onRemoveWidget.bind(this, idx)}>
+                        isEdit={this.state.editMode}
+                        onRemove={this.onRemoveWidget.bind(this, idx)}
+                    >
                         { getWidget(item) }
                     </Widget>
                 </div>
@@ -137,12 +149,14 @@ class Container extends React.Component {
         });
 
         return (
-            <div style={{ width: '100%' }}>
+            <div>
+                <Header isEditMode={this.state.editMode} onEditModeToggle={this.toggleEditMode} />
+
                 <DevicesGrid layouts={layouts} onUpdateLayout={this.onUpdateLayout}>
                     {widgets}
                 </DevicesGrid>
 
-                {this.props.editMode
+                {this.state.editMode
                     ? <AddWidget />
                     : null
                 }
@@ -155,11 +169,6 @@ Container.propTypes = {
     devices: PropTypes.arrayOf(PropTypes.object).isRequired,
     dashboard: PropTypes.arrayOf(PropTypes.object).isRequired,
     dispatch: PropTypes.func.isRequired,
-    editMode: PropTypes.bool,
-};
-
-Container.defaultProps = {
-    editMode: false,
 };
 
 export default connect(mapStateToProps)(Container);

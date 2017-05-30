@@ -21,18 +21,31 @@ export const receiveDevices = devices => ({
     devices,
 });
 
-export const fetchDevices = () => (dispatch) => {
-    axios.get('http://192.168.1.15:8090/json.htm', {
+export const loadDomoticzDevices = () => axios
+    .get('http://192.168.1.15:8090/json.htm', {
         params: {
             type: 'devices',
             used: true,
         },
     })
-        .then((response) => {
-            const devices = response.data.result || [];
+    .then((response) => {
+        const devices = response.data.result || [];
+        return domoticzAdapter(devices);
+    });
 
-            dispatch(receiveDevices(domoticzAdapter(devices)));
-        });
+export const fetchDevices = () => (dispatch) => {
+    loadDomoticzDevices().then((devices) => {
+        dispatch(receiveDevices(devices));
+    });
+};
+
+export const refreshDevices = () => (dispatch) => {
+    dispatch({ type: 'REFRESH_START' });
+
+    loadDomoticzDevices().then((devices) => {
+        dispatch(receiveDevices(devices));
+        dispatch({ type: 'REFRESH_FINISH' });
+    });
 };
 
 export const setDeviceState = (id, value) => (dispatch) => {

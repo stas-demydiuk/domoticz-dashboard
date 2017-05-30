@@ -6,7 +6,7 @@ export default function Counter(props) {
 
     return (
         <div>
-            <h1>{ this.props.device.label }</h1>
+            <h1>{ device.label }</h1>
             <h2 className="widget-value">
                 { device.value }
             </h2>

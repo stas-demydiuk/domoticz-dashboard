@@ -1,0 +1,21 @@
+.header {
+    background-color: #444;
+    border-bottom: 1px solid rgba(34, 34, 34, 0.9);
+
+    padding: 4px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.header > .btn-header {
+    width: auto;
+    color: #888;
+    font-size: 18px;
+}
+
+.header > .btn-header.active {
+    color: white;
+}
