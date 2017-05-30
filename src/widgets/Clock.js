@@ -23,7 +23,7 @@ export default class Clock extends React.Component {
         let value = moment(this.state.date);
 
         return (
-            <div className="widget widget-primary active">
+            <div>
                 <h1>{ value.format('MMMM Do YYYY') }</h1>
                 <h2 className="widget-value">{ value.format('HH:mm') }</h2>
             </div>

@@ -1,0 +1,67 @@
+.widget {
+    box-sizing: border-box;
+    text-align: center;
+    padding: 6px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(34, 34, 34, 0.9);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.widget-default {
+    background-color: #444
+}
+
+.widget-primary {
+    background-color: #456A90;
+}
+
+.widget h1 {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+
+    min-height: 32px;
+    margin-top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget .widget-value {
+    color: #888;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+
+    font-size: 36px;
+    line-height: 1;
+    margin: 0;
+}
+
+.widget .widget-value > .units {
+    font-size: 18px;
+    vertical-align: super;
+}
+
+.widget.active .widget-value,
+.widget-clock .widget-value {
+    color: rgb(255, 255, 255);
+}
+
+.btn-remove-widget {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    font-size: 14px;
+    border: none;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #888
+}

@@ -17,12 +17,10 @@ export default class Dimmer extends React.Component {
 
     render() {
         const device = this.props.device;
-        const isActive = device.value > 0;
 
         return (
-            <div className={"widget widget-dimmer widget-default" + (isActive ? ' active' : '')}
-                 onClick={this.props.onClick}>
-                <h1>{ this.props.device.label }</h1>
+            <div>
+                <h1>{ device.label }</h1>
                 <h2 className="widget-value">
                     { this.state.value }<span className="units">%</span>
                 </h2>

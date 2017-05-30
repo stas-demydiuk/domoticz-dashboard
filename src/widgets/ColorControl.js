@@ -42,7 +42,7 @@ export default class ColorControl extends React.Component {
 
     render() {
         return (
-            <div className="widget widget-default" onClick={this.handleOpenModal}>
+            <div onClick={this.handleOpenModal}>
                 <h1>{ this.props.device.label }</h1>
                 <h2 className="widget-value">
                     <i className={"fa fa-lightbulb-o"} aria-hidden="true" style={{color: this.state.color}}></i>

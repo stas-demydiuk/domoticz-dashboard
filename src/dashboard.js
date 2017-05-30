@@ -5,7 +5,7 @@ export const widgetTypes = {
     counter: 'COUNTER',
     dimmer: 'DIMMER',
     'switch': 'SWITCH',
-    binaryState: 'BINARY_STATE',
+    binaryState: 'BINARY-STATE',
 };
 
 export const deviceType = {
@@ -18,13 +18,14 @@ export const deviceType = {
 export const config = [
     {
         layout: {x: 0, y: 0, w: 1, h: 1, static: true},
-        type: widgetTypes.clock
+        type: widgetTypes.clock,
+        style: 'primary'
     },
     {
         layout: {x: 1, y: 0, w: 2, h: 1, minW: 1, maxW: 4},
         deviceId: '9',
         type: widgetTypes.climate,
-        color: 'primary'
+        style: 'primary'
     },
     {
         layout: {x: 3, y: 0, w: 1, h: 1, static: true},

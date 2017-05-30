@@ -8,7 +8,7 @@ export default class ClimateState extends React.Component {
         const units = device.value.celsius ? 'C' : 'F';
 
         return (
-            <div className={"widget widget-climate widget-" + widgetColor}>
+            <div>
                 <h1>{ device.label }</h1>
 
                 <div className="values">

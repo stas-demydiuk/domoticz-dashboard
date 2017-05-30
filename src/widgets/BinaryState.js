@@ -9,7 +9,7 @@ export default class BinaryState extends React.Component {
             : this.props.config.icons.Off;
 
         return (
-            <div className={"widget widget-default widget-binary-state" + (isActive ? ' active' : '')}>
+            <div>
                 <h1>{ this.props.device.label }</h1>
                 <h2 className="widget-value">
                     <i className={"fa " + icon} aria-hidden="true"></i>

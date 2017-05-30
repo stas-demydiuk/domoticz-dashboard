@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchDevices, setDeviceColor, setDeviceState, setDeviceLevel} from '../actions';
+import {fetchDevices, setDeviceColor, setDeviceState, setDeviceLevel, removeWidget, updateLayout} from '../actions';
 import DevicesGrid from '../DevicesGrid';
-import {config, widgetTypes} from '../dashboard';
+import {widgetTypes} from '../dashboard';
 
 import Clock from '../widgets/Clock';
 import Switch from '../widgets/Switch'
@@ -13,9 +13,11 @@ import ColorControl from "../widgets/ColorControl";
 import Dimmer from "../widgets/Dimmer";
 import Counter from "../widgets/Counter";
 import AddWidget from "../AddWidget";
+import Widget from "../widgets/Widget";
 
 const mapStateToProps = (state) => {
     return {
+        dashboard: state.dashboard,
         devices: state.devices
     }
 };
@@ -56,6 +58,16 @@ class Container extends React.Component {
         dispatch(setDeviceLevel(device.id, value));
     };
 
+    onRemoveWidget = (index) => {
+        const {dispatch} = this.props;
+        dispatch(removeWidget(index));
+    };
+
+    onUpdateLayout = (layout) => {
+        const {dispatch} = this.props;
+        dispatch(updateLayout(layout));
+    };
+
     getDevice = (id) => {
         return this.props.devices.find(device => device.id === id)
     };
@@ -88,7 +100,7 @@ class Container extends React.Component {
             }
         };
 
-        const layout = config.map((item, idx) => {
+        const layout = this.props.dashboard.map((item, idx) => {
             let baseConfig = {...item.layout, i: idx.toString()};
 
             return this.props.editMode
@@ -104,17 +116,35 @@ class Container extends React.Component {
             xxs: layout
         };
 
-        const widgets = config.map((item, idx) => {
-            return <div key={idx.toString()}>{ getWidget(item) }</div>
+        const widgets = this.props.dashboard.map((item, idx) => {
+            const device = item.deviceId
+                ? this.getDevice(item.deviceId)
+                : null;
+
+            return (
+                <div key={idx.toString()}>
+                    <Widget
+                        type={item.type.toLowerCase()}
+                        style={item.style}
+                        isActive={device ? device.isActive : false}
+                        isEdit={this.props.editMode}
+                        onRemove={this.onRemoveWidget.bind(this, idx)}>
+                        { getWidget(item) }
+                    </Widget>
+                </div>
+            );
         });
 
         return (
-            <div>
-                <DevicesGrid layouts={layouts}>
+            <div style={{width: '100%'}}>
+                <DevicesGrid layouts={layouts} onUpdateLayout={this.onUpdateLayout}>
                     {widgets}
                 </DevicesGrid>
 
-                {this.props.editMode ? <AddWidget/> : null}
+                {this.props.editMode
+                    ? <AddWidget />
+                    : null
+                }
             </div>
         )
     }

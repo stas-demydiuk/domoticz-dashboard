@@ -1,10 +1,24 @@
 import axios from 'axios';
 import domoticzAdapter from '../domoticzAdapter'
 
-export const toggleDevice = (id) => {
+export const removeWidget = (id) => {
     return {
-        type: 'TOGGLE_DEVICE',
+        type: 'REMOVE_WIDGET',
         id
+    }
+};
+
+export const addWidget = (data) => {
+    return {
+        type: 'ADD_WIDGET',
+        data
+    }
+};
+
+export const updateLayout = (layout) => {
+    return {
+        type: 'UPDATE_LAYOUT',
+        layout
     }
 };
 
@@ -77,7 +91,9 @@ export const fetchDevices = () => {
             }
         })
             .then(response => {
-                dispatch(receiveDevices(domoticzAdapter(response.data.result)));
+                let devices = response.data.result || [];
+
+                dispatch(receiveDevices(domoticzAdapter(devices)));
             })
     }
 };

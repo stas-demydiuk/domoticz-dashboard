@@ -9,7 +9,15 @@ const domoticzDeviceDataAdapter = (devices) => devices.map(device => {
 });
 
 function isDeviceActive(device) {
-    return ['On', 'Unlocked'].indexOf(device.Data) !== -1
+    if (['On', 'Unlocked'].indexOf(device.Data) !== -1) {
+        return true;
+    }
+
+    if (['Off', 'Locked'].indexOf(device.Data) !== -1) {
+        return false;
+    }
+
+    return device.Level > 0
 }
 
 function getDeviceValue(device) {
