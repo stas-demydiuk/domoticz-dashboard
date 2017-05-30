@@ -12,14 +12,14 @@ export default class BinaryState extends React.Component {
             <div>
                 <h1>{ this.props.device.label }</h1>
                 <h2 className="widget-value">
-                    <i className={"fa " + icon} aria-hidden="true"></i>
+                    <i className={'fa ' + icon} aria-hidden="true" />
                 </h2>
             </div>
-        )
+        );
     }
 }
 
 BinaryState.propTypes = {
     device: PropTypes.object.isRequired,
-    config: PropTypes.object.isRequired
+    config: PropTypes.object.isRequired,
 };

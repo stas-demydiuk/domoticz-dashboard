@@ -1,12 +1,10 @@
-const domoticzDeviceDataAdapter = (devices) => devices.map(device => {
-    return {
-        id: device.idx,
-        label: device.Name,
-        value: getDeviceValue(device),
-        isActive: isDeviceActive(device),
-        raw: device
-    }
-});
+const domoticzDeviceDataAdapter = devices => devices.map(device => ({
+    id: device.idx,
+    label: device.Name,
+    value: getDeviceValue(device),
+    isActive: isDeviceActive(device),
+    raw: device,
+}));
 
 function isDeviceActive(device) {
     if (['On', 'Unlocked'].indexOf(device.Data) !== -1) {
@@ -17,7 +15,7 @@ function isDeviceActive(device) {
         return false;
     }
 
-    return device.Level > 0
+    return device.Level > 0;
 }
 
 function getDeviceValue(device) {
@@ -25,8 +23,8 @@ function getDeviceValue(device) {
         return {
             temperature: device.Temp,
             celsius: device.Data.indexOf(' C') > 0,
-            humidity: device.Humidity
-        }
+            humidity: device.Humidity,
+        };
     }
 
     if (device.Type === 'Light/Switch' && device.SwitchType === 'Dimmer') {

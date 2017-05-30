@@ -5,5 +5,13 @@
     "react",
     "jsx-a11y",
     "import"
-  ]
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "indent": ["warn", 4],
+    "react/jsx-indent": ["warn", 4],
+    "react/jsx-indent-props": ["warn", 4]
+  }
 }

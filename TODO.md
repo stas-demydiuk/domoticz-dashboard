@@ -7,3 +7,4 @@
 - [ ] Server configuration
 - [ ] README
 - [ ] MQTT Support (websockets)
+- [ ] Make widgets accessible 

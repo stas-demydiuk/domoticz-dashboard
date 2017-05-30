@@ -4,7 +4,7 @@ import dashboard from './dashboard';
 
 const dashboardApp = combineReducers({
     dashboard,
-    devices
+    devices,
 });
 
-export default dashboardApp
+export default dashboardApp;

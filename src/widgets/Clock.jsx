@@ -4,7 +4,7 @@ import moment from 'moment';
 export default class Clock extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {date: new Date()};
+        this.state = { date: new Date() };
     }
 
     componentDidMount() {
@@ -16,17 +16,17 @@ export default class Clock extends React.Component {
     }
 
     tick = () => {
-        this.setState({date: new Date()});
+        this.setState({ date: new Date() });
     };
 
     render() {
-        let value = moment(this.state.date);
+        const value = moment(this.state.date);
 
         return (
             <div>
                 <h1>{ value.format('MMMM Do YYYY') }</h1>
                 <h2 className="widget-value">{ value.format('HH:mm') }</h2>
             </div>
-        )
+        );
     }
 }

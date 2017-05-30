@@ -1,6 +1,11 @@
-import {config} from '../dashboard';
+import { config } from '../dashboard';
 
 const initialState = JSON.parse(window.localStorage.getItem('dashboard')) || config;
+
+const saveState = (state) => {
+    window.localStorage.setItem('dashboard', JSON.stringify(state));
+    return state;
+};
 
 const dashboard = (state = initialState, action) => {
     switch (action.type) {
@@ -10,17 +15,12 @@ const dashboard = (state = initialState, action) => {
             return saveState(state.filter((element, index) => index !== action.id));
         case 'UPDATE_LAYOUT':
             return saveState(state.map((element, index) => {
-                const {x, y, w, h} = action.layout[index];
-                return {...element, layout: {x, y, w, h}}
+                const { x, y, w, h } = action.layout[index];
+                return { ...element, layout: { x, y, w, h } };
             }));
         default:
-            return state
+            return state;
     }
-};
-
-const saveState = (state) => {
-    window.localStorage.setItem('dashboard', JSON.stringify(state));
-    return state;
 };
 
 export default dashboard;

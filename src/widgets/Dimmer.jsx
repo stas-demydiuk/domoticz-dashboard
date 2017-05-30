@@ -7,11 +7,11 @@ export default class Dimmer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {value: props.device.value}
+        this.state = { value: props.device.value };
     }
 
     onChange = (value) => {
-        this.setState({value: value});
+        this.setState({ value });
         this.props.onChange(value);
     };
 
@@ -24,14 +24,16 @@ export default class Dimmer extends React.Component {
                 <h2 className="widget-value">
                     { this.state.value }<span className="units">%</span>
                 </h2>
-                <Slider onChange={this.onChange} value={this.state.value}/>
+                <Slider onChange={this.onChange} value={this.state.value} />
             </div>
-        )
+        );
     }
 }
 
 Dimmer.propTypes = {
-    device: PropTypes.object.isRequired,
-    config: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
+    device: PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.any,
+    }).isRequired,
+    onChange: PropTypes.func.isRequired,
 };
