@@ -5,6 +5,6 @@
 - [ ] Ability to set icon in "Create widget" modal
 - [ ] Style "Create widget" modal
 - [ ] Server configuration
-- [ ] README
+- [x] README
 - [ ] MQTT Support (websockets)
 - [x] Make widgets accessible 
