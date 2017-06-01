@@ -1,25 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class BinaryState extends React.Component {
-    render() {
-        const isActive = this.props.device.isActive;
-        const icon = isActive
-            ? this.props.config.icons.On
-            : this.props.config.icons.Off;
+export default function BinaryState(props) {
+    const isActive = props.device.isActive;
+    const icon = isActive
+        ? props.config.icons.On
+        : props.config.icons.Off;
 
-        return (
-            <div>
-                <h1>{ this.props.device.label }</h1>
-                <h2 className="widget-value">
-                    <i className={'fa ' + icon} aria-hidden="true" />
-                </h2>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <h1>{ this.props.device.label }</h1>
+            <h2 className="widget-value">
+                <i className={`fa ${icon}`} aria-hidden="true" />
+            </h2>
+        </div>
+    );
 }
 
 BinaryState.propTypes = {
-    device: PropTypes.object.isRequired,
-    config: PropTypes.object.isRequired,
+    device: PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.object,
+        isActive: PropTypes.bool,
+    }).isRequired,
+    config: PropTypes.shape({
+        icons: PropTypes.shape({
+            On: PropTypes.string.isRequired,
+            Off: PropTypes.string.isRequired,
+        }),
+    }).isRequired,
 };
