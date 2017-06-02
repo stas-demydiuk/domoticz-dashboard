@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 
-import 'react-responsive-carousel/lib/styles/carousel.css';
+import Page from '../components/dashboard/Page';
+import Header from './Header';
+import AddPage from './dashboard/AddPage';
 
 import {
     fetchDevices,
@@ -12,10 +14,8 @@ import {
     updateLayout,
 } from '../actions';
 
-import Page from '../components/dashboard/Page';
 
-import Header from './Header';
-import AddPage from './dashboard/AddPage';
+import './DeviceGrid.css';
 
 const mapStateToProps = state => ({
     pages: state.dashboard.pages,

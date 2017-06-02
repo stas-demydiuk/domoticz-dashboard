@@ -1,0 +1,111 @@
+.carousel .control-disabled.control-arrow {
+    display: none;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+}
+
+.carousel * {
+    box-sizing: border-box;
+}
+
+.carousel .slider {
+    margin: 0;
+    padding: 0;
+}
+
+.carousel .carousel {
+    position: relative;
+}
+
+.carousel.carousel-slider {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+
+.carousel .slider-wrapper {
+    overflow: hidden;
+    margin: auto;
+    width: 100%;
+    transition: height 0.15s ease-in;
+}
+
+.carousel .slider-wrapper.axis-horizontal .slider {
+    display: flex;
+}
+
+.carousel .slider-wrapper.axis-horizontal .slider .slide {
+    flex-direction: column;
+    flex-flow: column;
+}
+
+.carousel .slider-wrapper.axis-vertical {
+    display: flex;
+}
+
+.carousel .slider-wrapper.axis-vertical .slider {
+    flex-direction: column;
+}
+
+.carousel .slider {
+    position: relative;
+    list-style: none;
+    width: 100%;
+}
+
+.carousel .slider.animated {
+    transition: all 0.35s ease-in-out;
+}
+
+.carousel .slide {
+    min-width: 100%;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    background: #000;
+}
+
+.carousel .control-dots {
+    position: absolute;
+    bottom: 0;
+    margin: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.carousel .control-dots .dot {
+    transition: opacity 0.25s ease-in;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+    background: #fff;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 8px;
+}
+
+.carousel .control-dots .dot.selected,
+.carousel .control-dots .dot:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.carousel .carousel-status {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    font-size: 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
+    color: #fff;
+}
+
+.carousel:hover .slide .legend {
+    opacity: 1;
+}
