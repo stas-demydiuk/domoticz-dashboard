@@ -6,10 +6,11 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import { connect } from 'react-redux';
-import { widgetTypes } from './dashboard';
-import { addWidget } from './actions';
+import { widgetTypes } from '../../dashboard';
+import { addWidget } from '../../actions';
 
 import './AddWidget.css';
+import Widget from '../../widgets/Widget';
 
 const mapStateToProps = state => ({
     devices: state.devices,
@@ -77,9 +78,16 @@ class AddWidget extends React.Component {
         const styles = ['default', 'primary'].map(style => ({ value: style, label: style }));
 
         return (
-            <div>
-                <button className="btn-add-device" onClick={this.handleOpenModal}>
-                    <i className="fa fa-plus" />
+            <Widget
+                style="transparent"
+                isActive={false}
+                isEdit={false}
+            >
+                <button className="btn" onClick={this.handleOpenModal}>
+                    <h1>Add Widget</h1>
+                    <h2 className="widget-value">
+                        <i className="fa fa-plus" />
+                    </h2>
                 </button>
 
                 <ReactModal
@@ -115,7 +123,7 @@ class AddWidget extends React.Component {
 
                     <button className="btn-add" onClick={this.handleAddWidget}>Add</button>
                 </ReactModal>
-            </div>
+            </Widget>
         );
     }
 }

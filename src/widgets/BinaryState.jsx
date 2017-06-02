@@ -9,7 +9,7 @@ export default function BinaryState(props) {
 
     return (
         <div>
-            <h1>{ this.props.device.label }</h1>
+            <h1>{ props.device.label }</h1>
             <h2 className="widget-value">
                 <i className={`fa ${icon}`} aria-hidden="true" />
             </h2>
@@ -20,7 +20,6 @@ export default function BinaryState(props) {
 BinaryState.propTypes = {
     device: PropTypes.shape({
         label: PropTypes.string,
-        value: PropTypes.object,
         isActive: PropTypes.bool,
     }).isRequired,
     config: PropTypes.shape({

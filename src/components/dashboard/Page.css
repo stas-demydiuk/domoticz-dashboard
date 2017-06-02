@@ -7,6 +7,10 @@ body {
     outline: none;
 }
 
+.carousel .slide {
+    background: transparent;
+}
+
 .btn {
     background-color: transparent;
     border: none;

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { CirclePicker, HuePicker } from 'react-color';
+import { connect } from 'react-redux';
+import { setDeviceColor, setDeviceState } from '../actions/index';
 
 ReactModal.setAppElement('#root');
 
@@ -12,7 +14,7 @@ const colors = [
     '#000066', '#000099', '#0000CC', '#0000FF', '#3366FF', '#3399FF', '#66CCFF', '#99CCFF',
 ];
 
-export default class ColorControl extends React.Component {
+class ColorControl extends React.Component {
     constructor() {
         super();
 
@@ -22,13 +24,21 @@ export default class ColorControl extends React.Component {
     }
 
     setColor = (color) => {
+        const { device, dispatch } = this.props;
         const isOff = color.rgb.r === 0 && color.rgb.g === 0 && color.rgb.b === 0;
+        const isWhite = color.rgb.r === 255 && color.rgb.g === 255 && color.rgb.b === 255;
 
         this.setState({
             color: isOff ? undefined : color.hex,
         });
 
-        this.props.onChange(color);
+        if (isOff) {
+            dispatch(setDeviceState(device.id, 'Off'));
+        } else if (isWhite) {
+            dispatch(setDeviceState(device.id, 'On'));
+        } else {
+            dispatch(setDeviceColor(device.id, color));
+        }
     };
 
     handleOpenModal = () => {
@@ -74,5 +84,7 @@ ColorControl.propTypes = {
         label: PropTypes.string,
         value: PropTypes.any,
     }).isRequired,
-    onChange: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
+
+export default connect()(ColorControl);

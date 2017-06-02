@@ -20,6 +20,10 @@
     background-color: #456A90;
 }
 
+.widget-transparent {
+    background-color: rgba(68, 68, 68, 0.25);
+}
+
 .widget h1 {
     color: rgba(255, 255, 255, 0.75);
     font-size: 14px;

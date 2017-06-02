@@ -3,6 +3,8 @@
 Flexible dashboard for Domoticz for devices with touch interfaces
 This project is based on ideas of HADashboard. HADashboard was originally created by [FlorianZ](https://github.com/FlorianZ/hadashboard) for use with the SmartThings Home Automation system, with notable contributions from the [SmartThings Community](https://community.smartthings.com/t/home-automation-dashboard/4926).
 
+<span style="color:#f78c75"> *Dashboard is in development and is not ready for production yet*</span>
+
 # Installation
 
 ## Requirements

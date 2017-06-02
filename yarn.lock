@@ -5023,6 +5023,12 @@ react-draggable@^2.1.1, react-draggable@^2.2.6:
   dependencies:
     classnames "^2.2.5"
 
+react-easy-swipe@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/react-easy-swipe/-/react-easy-swipe-0.0.13.tgz#c00e90dabed8d0878e8c8313b867e01435f0f637"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-error-overlay@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-1.0.7.tgz#8712fe40cfc194ce992a4136c091c03bfada9148"
@@ -5079,6 +5085,14 @@ react-resizable@^1.4.0:
   dependencies:
     prop-types "^15.5.8"
     react-draggable "^2.2.6"
+
+react-responsive-carousel@^3.1.19:
+  version "3.1.19"
+  resolved "https://registry.yarnpkg.com/react-responsive-carousel/-/react-responsive-carousel-3.1.19.tgz#a333b1364b168c3cd9b7565d720b207f8e26f5e1"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.5.8"
+    react-easy-swipe "^0.0.13"
 
 react-router@^4.1.0, react-router@^4.1.1:
   version "4.1.1"

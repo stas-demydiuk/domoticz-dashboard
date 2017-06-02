@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchDevices, setDeviceColor, setDeviceState, setDeviceLevel, removeWidget, updateLayout } from '../actions';
-import DevicesGrid from '../DevicesGrid';
-import { widgetTypes } from '../dashboard';
+import { Carousel } from 'react-responsive-carousel';
 
-import Clock from '../widgets/Clock';
-import Switch from '../widgets/Switch';
-import BinaryState from '../widgets/BinaryState';
-import ClimateState from '../widgets/ClimateState';
-import ColorControl from '../widgets/ColorControl';
-import Dimmer from '../widgets/Dimmer';
-import Counter from '../widgets/Counter';
-import AddWidget from '../AddWidget';
-import Widget from '../widgets/Widget';
+import 'react-responsive-carousel/lib/styles/carousel.css';
+
+import {
+    fetchDevices,
+    fetchRooms,
+    removeWidget,
+    updateLayout,
+} from '../actions';
+
+import Page from '../components/dashboard/Page';
+
 import Header from './Header';
+import AddPage from './dashboard/AddPage';
 
 const mapStateToProps = state => ({
-    dashboard: state.dashboard,
+    pages: state.dashboard.pages,
     devices: state.devices,
 });
 
@@ -25,12 +26,16 @@ class Container extends React.Component {
     constructor() {
         super();
 
-        this.state = { editMode: false };
+        this.state = {
+            editMode: false,
+            selectedPage: 0,
+        };
     }
 
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(fetchDevices());
+        dispatch(fetchRooms());
 
         this.timerId = setInterval(() => {
             dispatch(fetchDevices());
@@ -45,119 +50,64 @@ class Container extends React.Component {
         this.setState({ editMode: !this.state.editMode });
     };
 
-    onSwitchClick = (device) => {
+    handleOnRemoveWidget = (page, index) => {
         const { dispatch } = this.props;
-        dispatch(setDeviceState(device.id, device.value === 'Off' ? 'On' : 'Off'));
+        dispatch(removeWidget(page, index));
     };
 
-    onColorSet = (device, color) => {
+    handleOnUpdateLayout = (page, layout) => {
         const { dispatch } = this.props;
+        dispatch(updateLayout(page, layout));
+    };
 
-        if (color.rgb.r === 0 && color.rgb.g === 0 && color.rgb.b === 0) {
-            dispatch(setDeviceState(device.id, 'Off'));
-        } else if (color.rgb.r === 255 && color.rgb.g === 255 && color.rgb.b === 255) {
-            dispatch(setDeviceState(device.id, 'On'));
-        } else {
-            dispatch(setDeviceColor(device.id, color));
+    handleOnPageChange = (index) => {
+        if (this.state.editMode) {
+            return;
         }
-    };
 
-    onLevelSet = (device, value) => {
-        const { dispatch } = this.props;
-        dispatch(setDeviceLevel(device.id, value));
+        this.setState({ selectedPage: index });
     };
-
-    onRemoveWidget = (index) => {
-        const { dispatch } = this.props;
-        dispatch(removeWidget(index));
-    };
-
-    onUpdateLayout = (layout) => {
-        const { dispatch } = this.props;
-        dispatch(updateLayout(layout));
-    };
-
-    getDevice = id => this.props.devices.find(device => device.id === id);
 
     render() {
-        const getWidget = (item) => {
-            const device = item.deviceId
-                ? this.getDevice(item.deviceId)
-                : null;
+        const isEditMode = this.state.editMode;
 
-            const onSwitchClick = this.onSwitchClick.bind(this, device);
-            const onColorSet = this.onColorSet.bind(this, device);
-            const onLevelSet = this.onLevelSet.bind(this, device);
-
-            switch (item.type) {
-                case widgetTypes.clock:
-                    return <Clock />;
-                case widgetTypes.switch:
-                    return device ? <Switch device={device} onClick={onSwitchClick} /> : null;
-                case widgetTypes.binaryState:
-                    return device ? <BinaryState device={device} config={item} /> : null;
-                case widgetTypes.climate:
-                    return device ? <ClimateState device={device} config={item} /> : null;
-                case widgetTypes.color:
-                    return device
-                        ? <ColorControl device={device} config={item} onChange={onColorSet} />
-                        : null;
-                case widgetTypes.counter:
-                    return device ? <Counter device={device} config={item} /> : null;
-                case widgetTypes.dimmer:
-                    return device ?
-                        <Dimmer device={device} config={item} onChange={onLevelSet} /> : null;
-                default:
-                    return null;
-            }
+        const settings = {
+            showArrows: false,
+            showStatus: false,
+            showIndicators: !isEditMode,
+            showThumbs: false,
+            infiniteLoop: true,
+            selectedItem: isEditMode ? 0 : this.state.selectedPage,
+            onChange: this.handleOnPageChange,
         };
 
-        const layout = this.props.dashboard.map((item, idx) => {
-            const baseConfig = { ...item.layout, i: idx.toString() };
-
-            return this.props.editMode
-                ? { ...baseConfig, static: false }
-                : { ...baseConfig, static: true };
-        });
-
-        const layouts = {
-            lg: layout,
-            md: layout,
-            sm: layout,
-            xs: layout,
-            xxs: layout,
-        };
-
-        const widgets = this.props.dashboard.map((item, idx) => {
-            const device = item.deviceId
-                ? this.getDevice(item.deviceId)
-                : null;
-
-            return (
-                <div key={idx.toString()}>
-                    <Widget
-                        type={item.type.toLowerCase()}
-                        style={item.style}
-                        isActive={device ? device.isActive : false}
-                        isEdit={this.state.editMode}
-                        onRemove={this.onRemoveWidget.bind(this, idx)}
-                    >
-                        { getWidget(item) }
-                    </Widget>
-                </div>
-            );
-        });
+        const pages = this.props.pages
+            .map((page, idx) => (
+                <Page
+                    key={idx}
+                    editMode={isEditMode}
+                    items={page.widgets}
+                    devices={this.props.devices}
+                    onUpdateLayout={(layout) => {
+                        this.handleOnUpdateLayout(idx, layout);
+                    }}
+                    onRemoveWidget={(index) => {
+                        this.handleOnRemoveWidget(idx, index);
+                    }}
+                />
+            ))
+            .filter((page, idx) => (isEditMode ? idx === this.state.selectedPage : true));
 
         return (
             <div>
-                <Header isEditMode={this.state.editMode} onEditModeToggle={this.toggleEditMode} />
+                <Header isEditMode={isEditMode} onEditModeToggle={this.toggleEditMode} />
 
-                <DevicesGrid layouts={layouts} onUpdateLayout={this.onUpdateLayout}>
-                    {widgets}
-                </DevicesGrid>
+                <Carousel {...settings}>
+                    {pages}
+                </Carousel>
 
                 {this.state.editMode
-                    ? <AddWidget />
+                    ? <AddPage />
                     : null
                 }
             </div>
@@ -167,7 +117,7 @@ class Container extends React.Component {
 
 Container.propTypes = {
     devices: PropTypes.arrayOf(PropTypes.object).isRequired,
-    dashboard: PropTypes.arrayOf(PropTypes.object).isRequired,
+    pages: PropTypes.arrayOf(PropTypes.object).isRequired,
     dispatch: PropTypes.func.isRequired,
 };
 

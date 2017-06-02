@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
+import { connect } from 'react-redux';
+import { setDeviceLevel } from '../actions/index';
 
-export default class Dimmer extends React.Component {
-
+class Dimmer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -11,8 +12,10 @@ export default class Dimmer extends React.Component {
     }
 
     onChange = (value) => {
+        const { device, dispatch } = this.props;
+
         this.setState({ value });
-        this.props.onChange(value);
+        dispatch(setDeviceLevel(device.id, value));
     };
 
     render() {
@@ -32,8 +35,11 @@ export default class Dimmer extends React.Component {
 
 Dimmer.propTypes = {
     device: PropTypes.shape({
+        id: PropTypes.string.isRequired,
         label: PropTypes.string,
         value: PropTypes.any,
     }).isRequired,
-    onChange: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
+
+export default connect()(Dimmer);

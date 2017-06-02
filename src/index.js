@@ -18,6 +18,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
+import { addPage } from './actions/index';
+import { config } from './dashboard';
 
 const history = createHistory();
 
@@ -25,6 +27,9 @@ const store = createStore(
     connectRouter(history)(dashboardApp),
     compose(applyMiddleware(routerMiddleware(history), ReduxThunk)),
 );
+
+store.dispatch(addPage(0, config));
+store.dispatch(addPage(0, config));
 
 ReactDOM.render(
     <Provider store={store}>

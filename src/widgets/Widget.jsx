@@ -34,7 +34,7 @@ Widget.propTypes = {
     style: PropTypes.string,
     isActive: PropTypes.bool,
     isEdit: PropTypes.bool,
-    onRemove: PropTypes.func.isRequired,
+    onRemove: PropTypes.func,
 };
 
 Widget.defaultProps = {
@@ -43,4 +43,5 @@ Widget.defaultProps = {
     style: 'default',
     isActive: false,
     isEdit: false,
+    onRemove: () => null,
 };

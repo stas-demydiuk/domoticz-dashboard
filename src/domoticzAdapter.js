@@ -1,10 +1,16 @@
-const domoticzDeviceDataAdapter = devices => devices.map(device => ({
+export const deviceAdapter = device => ({
     id: device.idx,
     label: device.Name,
     value: getDeviceValue(device),
     isActive: isDeviceActive(device),
     raw: device,
-}));
+});
+
+export const roomAdapter = room => ({
+    id: room.idx,
+    name: room.Name,
+    order: parseInt(room.Order, 10),
+});
 
 function isDeviceActive(device) {
     if (['On', 'Unlocked'].indexOf(device.Data) !== -1) {
@@ -37,5 +43,3 @@ function getDeviceValue(device) {
 
     return device.Data;
 }
-
-export default domoticzDeviceDataAdapter;

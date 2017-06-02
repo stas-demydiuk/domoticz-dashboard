@@ -1,8 +1,11 @@
 import * as api from '../domoticzApi';
 
-export const removeWidget = id => ({
+export const removeWidget = (page, widget) => ({
     type: 'REMOVE_WIDGET',
-    id,
+    payload: {
+        page,
+        widget,
+    },
 });
 
 export const addWidget = data => ({
@@ -10,9 +13,20 @@ export const addWidget = data => ({
     data,
 });
 
-export const updateLayout = layout => ({
+export const addPage = (roomId, widgets) => ({
+    type: 'ADD_PAGE',
+    payload: {
+        roomId,
+        widgets,
+    },
+});
+
+export const updateLayout = (page, layout) => ({
     type: 'UPDATE_LAYOUT',
-    layout,
+    payload: {
+        page,
+        layout,
+    },
 });
 
 export const receiveDevices = devices => ({
@@ -20,9 +34,20 @@ export const receiveDevices = devices => ({
     devices,
 });
 
+export const receiveRooms = rooms => ({
+    type: 'RECEIVE_ROOMS',
+    payload: rooms,
+});
+
 export const fetchDevices = () => (dispatch) => {
     api.loadDevices().then((devices) => {
         dispatch(receiveDevices(devices));
+    });
+};
+
+export const fetchRooms = () => (dispatch) => {
+    api.loadRooms().then((rooms) => {
+        dispatch(receiveRooms(rooms));
     });
 };
 
