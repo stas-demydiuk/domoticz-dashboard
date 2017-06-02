@@ -71,16 +71,6 @@ class Container extends React.Component {
     render() {
         const isEditMode = this.state.editMode;
 
-        const settings = {
-            showArrows: false,
-            showStatus: false,
-            showIndicators: !isEditMode,
-            showThumbs: false,
-            infiniteLoop: true,
-            selectedItem: isEditMode ? 0 : this.state.selectedPage,
-            onChange: this.handleOnPageChange,
-        };
-
         const pages = this.props.pages
             .map((page, idx) => (
                 <Page
@@ -97,6 +87,16 @@ class Container extends React.Component {
                 />
             ))
             .filter((page, idx) => (isEditMode ? idx === this.state.selectedPage : true));
+
+        const settings = {
+            showArrows: false,
+            showStatus: false,
+            showIndicators: pages.length > 1,
+            showThumbs: false,
+            infiniteLoop: true,
+            selectedItem: isEditMode ? 0 : this.state.selectedPage,
+            onChange: this.handleOnPageChange,
+        };
 
         return (
             <div>
