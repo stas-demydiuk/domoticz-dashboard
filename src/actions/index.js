@@ -1,5 +1,8 @@
 import * as api from '../domoticzApi';
 
+export const STATE_ON = 'On';
+export const STATE_OFF = 'Off';
+
 export const removeWidget = (page, widget) => ({
     type: 'REMOVE_WIDGET',
     payload: {

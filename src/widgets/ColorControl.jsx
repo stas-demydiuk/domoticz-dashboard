@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { CirclePicker, HuePicker } from 'react-color';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { setDeviceColor, setDeviceState } from '../actions/index';
+import { setDeviceColor, setDeviceState, STATE_ON, STATE_OFF } from '../actions/index';
 
 ReactModal.setAppElement('#root');
 
@@ -24,7 +25,7 @@ class ColorControl extends React.Component {
     }
 
     setColor = (color) => {
-        const { device, dispatch } = this.props;
+        const { device } = this.props;
         const isOff = color.rgb.r === 0 && color.rgb.g === 0 && color.rgb.b === 0;
         const isWhite = color.rgb.r === 255 && color.rgb.g === 255 && color.rgb.b === 255;
 
@@ -33,11 +34,11 @@ class ColorControl extends React.Component {
         });
 
         if (isOff) {
-            dispatch(setDeviceState(device.id, 'Off'));
+            this.props.setDeviceState(device.id, STATE_OFF);
         } else if (isWhite) {
-            dispatch(setDeviceState(device.id, 'On'));
+            this.props.setDeviceState(device.id, STATE_ON);
         } else {
-            dispatch(setDeviceColor(device.id, color));
+            this.props.setDeviceColor(device.id, color);
         }
     };
 
@@ -52,7 +53,7 @@ class ColorControl extends React.Component {
     render() {
         return (
             <button className="btn" onClick={this.handleOpenModal}>
-                <h1>{ this.props.device.label }</h1>
+                <h1>{this.props.device.label}</h1>
                 <h2 className="widget-value">
                     <i className="fa fa-lightbulb-o" aria-hidden="true" style={{ color: this.state.color }} />
                 </h2>
@@ -67,12 +68,16 @@ class ColorControl extends React.Component {
                     <CirclePicker
                         colors={colors}
                         color={this.state.color}
-                        circleSize="32"
+                        circleSize={48}
                         width="100%"
                         onChangeComplete={this.setColor}
                     />
 
-                    <HuePicker color={this.state.color} width="360px" onChangeComplete={this.setColor} />
+                    <HuePicker
+                        color={this.state.color}
+                        width="485px"
+                        onChangeComplete={this.setColor}
+                    />
                 </ReactModal>
             </button>
         );
@@ -84,7 +89,12 @@ ColorControl.propTypes = {
         label: PropTypes.string,
         value: PropTypes.any,
     }).isRequired,
-    dispatch: PropTypes.func.isRequired,
+    setDeviceColor: PropTypes.func.isRequired,
+    setDeviceState: PropTypes.func.isRequired,
 };
 
-export default connect()(ColorControl);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ setDeviceColor, setDeviceState }, dispatch);
+}
+
+export default connect(undefined, mapDispatchToProps)(ColorControl);

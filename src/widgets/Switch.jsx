@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setDeviceState } from '../actions/index';
+import { bindActionCreators } from 'redux';
+import { setDeviceState, STATE_ON, STATE_OFF } from '../actions/index';
 
 class Switch extends React.Component {
     handleOnClick = () => {
-        const { device, dispatch } = this.props;
-        dispatch(setDeviceState(device.id, device.value === 'Off' ? 'On' : 'Off'));
+        const { device } = this.props;
+        this.props.setDeviceState(device.id, device.value === STATE_OFF ? STATE_ON : STATE_OFF);
     };
 
     render() {
@@ -29,7 +30,11 @@ Switch.propTypes = {
         label: PropTypes.string,
         value: PropTypes.any,
     }).isRequired,
-    dispatch: PropTypes.func.isRequired,
+    setDeviceState: PropTypes.func.isRequired,
 };
 
-export default connect()(Switch);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ setDeviceState }, dispatch);
+}
+
+export default connect(undefined, mapDispatchToProps)(Switch);
