@@ -10,7 +10,6 @@ import AddPage from './dashboard/AddPage';
 import {
     fetchDevices,
     fetchRooms,
-    removeWidget,
     updateLayout,
 } from '../actions';
 
@@ -50,11 +49,6 @@ class Container extends React.Component {
         this.setState({ editMode: !this.state.editMode });
     };
 
-    handleOnRemoveWidget = (page, index) => {
-        const { dispatch } = this.props;
-        dispatch(removeWidget(page, index));
-    };
-
     handleOnUpdateLayout = (page, layout) => {
         const { dispatch } = this.props;
         dispatch(updateLayout(page, layout));
@@ -75,14 +69,12 @@ class Container extends React.Component {
             .map((page, idx) => (
                 <Page
                     key={idx}
+                    id={idx}
                     editMode={isEditMode}
                     items={page.widgets}
                     devices={this.props.devices}
                     onUpdateLayout={(layout) => {
                         this.handleOnUpdateLayout(idx, layout);
-                    }}
-                    onRemoveWidget={(index) => {
-                        this.handleOnRemoveWidget(idx, index);
                     }}
                 />
             ))

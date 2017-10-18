@@ -12,8 +12,8 @@ function getNextWidgetPosition(layout) {
     const maxY = layout.reduce((value, item) => Math.max(value, item.y), 0);
     const maxX = layout.reduce((value, item) => Math.max(value, item.x), 0);
     const x = layout
-            .filter(item => item.y === maxY)
-            .reduce((value, item) => Math.max(value, item.x), 0) + 1;
+        .filter(item => item.y === maxY)
+        .reduce((value, item) => Math.max(value, item.x), 0) + 1;
 
     return x > maxX
         ? { y: maxY + 1, x: 0 }
@@ -39,12 +39,12 @@ export default function Page(props) {
         return (
             <div key={idx.toString()}>
                 <PageItem
+                    id={idx}
+                    pageId={props.id}
+                    key={idx.toString()}
                     widget={item}
                     device={device}
-                    editMode={props.editMode}
-                    onRemove={() => {
-                        props.onRemoveWidget(idx);
-                    }}
+                    isEditMode={props.editMode}
                 />
             </div>
         );
@@ -53,14 +53,15 @@ export default function Page(props) {
     if (props.editMode) {
         const idx = widgets.length.toString();
         const { x, y } = getNextWidgetPosition(layout);
+        const widgetLayout = { w: 1, h: 1, x, y };
 
         widgets.push((
             <div key={idx}>
-                <AddWidget />
+                <AddWidget pageId={props.id} layout={widgetLayout} />
             </div>
         ));
 
-        layout.push({ i: idx, w: 1, h: 1, x, y });
+        layout.push({ i: idx, ...widgetLayout });
     }
 
     const layouts = {
@@ -81,11 +82,12 @@ export default function Page(props) {
             cols={{ lg: 8, md: 6, sm: 4, xs: 4, xxs: 2 }}
         >
             {widgets}
-        </ResponsiveReactGridLayout >
+        </ResponsiveReactGridLayout>
     );
 }
 
 Page.propTypes = {
+    id: PropTypes.number.isRequired,
     editMode: PropTypes.bool.isRequired,
     devices: PropTypes.arrayOf(PropTypes.object).isRequired,
     items: PropTypes.arrayOf(PropTypes.shape({
@@ -94,5 +96,4 @@ Page.propTypes = {
         deviceId: PropTypes.string,
     })).isRequired,
     onUpdateLayout: PropTypes.func.isRequired,
-    onRemoveWidget: PropTypes.func.isRequired,
 };

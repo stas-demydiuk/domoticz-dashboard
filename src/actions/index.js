@@ -3,17 +3,39 @@ import * as api from '../domoticzApi';
 export const STATE_ON = 'On';
 export const STATE_OFF = 'Off';
 
-export const removeWidget = (page, widget) => ({
-    type: 'REMOVE_WIDGET',
+export const ADD_WIDGET = 'ADD_WIDGET';
+export const addWidget = (page, layout, widgetType, widgetStyle, deviceId) => ({
+    type: ADD_WIDGET,
     payload: {
         page,
-        widget,
+        widget: {
+            layout,
+            deviceId,
+            type: widgetType,
+            style: widgetStyle,
+        },
     },
 });
 
-export const addWidget = data => ({
-    type: 'ADD_WIDGET',
-    data,
+export const UPDATE_WIDGET = 'UPDATE_WIDGET';
+export const updateWidget = (page, widgetIndex, widgetType, widgetStyle, deviceId) => ({
+    type: UPDATE_WIDGET,
+    payload: {
+        page,
+        widgetIndex,
+        widgetType,
+        widgetStyle,
+        deviceId,
+    },
+});
+
+export const REMOVE_WIDGET = 'REMOVE_WIDGET';
+export const removeWidget = (page, widgetIndex) => ({
+    type: REMOVE_WIDGET,
+    payload: {
+        page,
+        widgetIndex,
+    },
 });
 
 export const addPage = (roomId, widgets) => ({

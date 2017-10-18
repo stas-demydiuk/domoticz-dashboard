@@ -39,11 +39,13 @@ const renderWidget = (config, device) => {
 export default function PageItem(props) {
     return (
         <Widget
-            type={props.widget.type.toLowerCase()}
+            id={props.id}
+            pageId={props.pageId}
+            type={props.widget.type}
             style={props.widget.style}
+            deviceId={props.device ? props.device.id : null}
             isActive={props.device ? props.device.isActive : false}
-            isEdit={props.editMode}
-            onRemove={props.onRemove}
+            isEdit={props.isEditMode}
         >
             { renderWidget(props.widget, props.device) }
         </Widget>
@@ -51,17 +53,19 @@ export default function PageItem(props) {
 }
 
 PageItem.propTypes = {
+    id: PropTypes.number.isRequired,
+    pageId: PropTypes.number.isRequired,
     device: PropTypes.shape({
+        id: PropTypes.string.isRequired,
         label: PropTypes.string,
         value: PropTypes.any,
-        isActive: PropTypes.bool,
+        isActive: PropTypes.bool.isRequired,
     }),
     widget: PropTypes.shape({
         type: PropTypes.string.isRequired,
         style: PropTypes.string,
     }).isRequired,
-    editMode: PropTypes.bool.isRequired,
-    onRemove: PropTypes.func.isRequired,
+    isEditMode: PropTypes.bool.isRequired,
 };
 
 PageItem.defaultProps = {
