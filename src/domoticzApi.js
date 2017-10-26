@@ -1,7 +1,17 @@
 import axios from 'axios';
 import { roomAdapter, deviceAdapter } from './domoticzAdapter';
 
-const url = 'http://192.168.1.15:8090/json.htm';
+let url = '/json.htm';
+
+export function setDomoticzConfig(config) {
+    url = `${config.protocol}://`;
+
+    if (config.username && config.password) {
+        url += `${config.username}:${config.password}@`;
+    }
+
+    url += `${config.server}/json.htm`;
+}
 
 export async function loadDevices() {
     const response = await axios.get(url, {

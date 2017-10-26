@@ -19,9 +19,9 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 import { addPage } from './actions/index';
-import { config } from './dashboard';
-
+import { config as dashboardConfig } from './dashboard';
 import initMqtt from './mqtt';
+import { setDomoticzConfig } from './domoticzApi';
 
 const history = createHistory();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -31,10 +31,14 @@ const store = createStore(
     composeEnhancers(applyMiddleware(routerMiddleware(history), ReduxThunk)),
 );
 
-initMqtt(store);
+setDomoticzConfig(window.config.domoticz);
 
-store.dispatch(addPage(0, config));
-store.dispatch(addPage(0, config));
+if (window.config.mqtt) {
+    initMqtt(store, window.config.mqtt);
+}
+
+store.dispatch(addPage(0, dashboardConfig));
+store.dispatch(addPage(0, dashboardConfig));
 
 ReactDOM.render(
     <Provider store={store}>

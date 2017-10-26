@@ -5,8 +5,11 @@ import { updateDevice } from './actions/index';
 const DOMOTICZ_TOPIC_IN = 'domoticz/in';
 const DOMOTICZ_TOPIC_OUT = 'domoticz/out';
 
-export default function init(store) {
-    const client = mqtt.connect('ws://192.168.1.15:9001');
+export default function init(store, options) {
+    const client = mqtt.connect(options.server, {
+        username: options.username,
+        password: options.password,
+    });
 
     client.on('connect', () => {
         client.subscribe(DOMOTICZ_TOPIC_OUT);
