@@ -21,12 +21,17 @@ import './index.css';
 import { addPage } from './actions/index';
 import { config } from './dashboard';
 
+import initMqtt from './mqtt';
+
 const history = createHistory();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
     connectRouter(history)(dashboardApp),
-    compose(applyMiddleware(routerMiddleware(history), ReduxThunk)),
+    composeEnhancers(applyMiddleware(routerMiddleware(history), ReduxThunk)),
 );
+
+initMqtt(store);
 
 store.dispatch(addPage(0, config));
 store.dispatch(addPage(0, config));

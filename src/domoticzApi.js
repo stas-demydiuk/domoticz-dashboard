@@ -57,8 +57,8 @@ export const setDeviceColor = (id, color) => axios
             type: 'command',
             param: 'setcolbrightnessvalue',
             idx: id,
-            hue: color.hsv.h,
-            brightness: parseInt(color.hsv.v * 100, 10),
+            hex: color.hex.replace('#', '').toUpperCase(),
+            brightness: 100,
             iswhite: color.rgb.r === 255 && color.rgb.g === 255 && color.rgb.b === 255,
         },
     });

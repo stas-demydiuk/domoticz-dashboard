@@ -5,9 +5,11 @@
   "dependencies": {
     "axios": "^0.16.1",
     "connected-react-router": "^4.2.1",
+    "express": "^4.16.2",
     "font-awesome": "^4.7.0",
     "history": "^4.6.1",
     "moment": "^2.18.1",
+    "mqtt": "^2.13.1",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.5.10",
     "rc-slider": "^7.0.8",
@@ -30,10 +32,11 @@
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
-    "react-scripts": "1.0.13"
+    "react-scripts": "^1.0.14"
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

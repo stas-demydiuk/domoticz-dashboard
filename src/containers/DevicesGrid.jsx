@@ -35,10 +35,6 @@ class Container extends React.Component {
         const { dispatch } = this.props;
         dispatch(fetchDevices());
         dispatch(fetchRooms());
-
-        this.timerId = setInterval(() => {
-            dispatch(fetchDevices());
-        }, 5000);
     }
 
     componentWillUnmount() {

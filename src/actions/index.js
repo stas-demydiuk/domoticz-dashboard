@@ -54,9 +54,21 @@ export const updateLayout = (page, layout) => ({
     },
 });
 
+export const RECEIVE_DEVICES = 'RECEIVE_DEVICES';
 export const receiveDevices = devices => ({
-    type: 'RECEIVE_DEVICES',
+    type: RECEIVE_DEVICES,
     devices,
+});
+
+export const UPDATE_DEVICE = 'UPDATE_DEVICE';
+export const updateDevice = (id, label, value, isActive) => ({
+    type: UPDATE_DEVICE,
+    payload: {
+        id,
+        label,
+        value,
+        isActive,
+    },
 });
 
 export const receiveRooms = rooms => ({

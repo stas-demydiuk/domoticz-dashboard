@@ -11,6 +11,14 @@ class Dimmer extends React.Component {
         this.state = { value: props.device.value };
     }
 
+    componentWillReceiveProps(newProps) {
+        if (newProps.device.value !== this.props.device.value) {
+            this.setState({
+                value: newProps.device.value,
+            });
+        }
+    }
+
     onChange = (value) => {
         const { device, dispatch } = this.props;
 
@@ -23,9 +31,9 @@ class Dimmer extends React.Component {
 
         return (
             <div>
-                <h1>{ device.label }</h1>
+                <h1>{device.label}</h1>
                 <h2 className="widget-value">
-                    { this.state.value }<span className="units">%</span>
+                    {this.state.value}<span className="units">%</span>
                 </h2>
                 <Slider onChange={this.onChange} value={this.state.value} />
             </div>

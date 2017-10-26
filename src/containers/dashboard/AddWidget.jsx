@@ -66,7 +66,7 @@ AddWidget.propTypes = {
         w: PropTypes.number.isRequired,
         h: PropTypes.number.isRequired,
         x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired
+        y: PropTypes.number.isRequired,
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
 };
