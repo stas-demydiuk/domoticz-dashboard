@@ -982,7 +982,7 @@ babel-runtime@6.26.0, babel-runtime@^6.18.0, babel-runtime@^6.26.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
-babel-runtime@6.x, babel-runtime@^6.22.0, babel-runtime@^6.23.0:
+babel-runtime@6.x, babel-runtime@^6.22.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
@@ -1448,7 +1448,7 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-classnames@^2.2.4, classnames@^2.2.5:
+classnames@2.x, classnames@^2.2.4, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -1734,6 +1734,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+create-react-class@15.x:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.2.tgz#cf1ed15f12aad7f14ef5f2dfe05e6c42f91ef02a"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
 
 create-react-class@^15.5.2:
   version "15.5.3"
@@ -5518,20 +5526,20 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8:
-  version "15.5.10"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.3.1"
-
-prop-types@^15.6.0:
+prop-types@15.x, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
+
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8:
+  version "15.5.10"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
 
 proxy-addr@~2.0.2:
   version "2.0.2"
@@ -5657,35 +5665,36 @@ rc-animate@2.x:
     css-animation "^1.3.0"
     prop-types "^15.5.6"
 
-rc-slider@^7.0.8:
-  version "7.0.8"
-  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-7.0.8.tgz#1bdd7cbfd8ec1b6418ba55e506888bbb50159556"
+rc-slider@8.3:
+  version "8.3.5"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.3.5.tgz#41f88ab95debe089139deee7120c6e151260b52d"
   dependencies:
     babel-runtime "6.x"
     classnames "^2.2.5"
     prop-types "^15.5.4"
-    rc-tooltip "^3.4.2"
+    rc-tooltip "^3.4.3"
     rc-util "^4.0.4"
+    shallowequal "^1.0.1"
     warning "^3.0.0"
 
-rc-tooltip@^3.4.2:
-  version "3.4.6"
-  resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-3.4.6.tgz#ed98de2a7b412e527c6bd8a2a97dddf0babd2f21"
-  dependencies:
-    babel-runtime "^6.23.0"
-    prop-types "^15.5.8"
-    rc-trigger "1.x"
-
-rc-trigger@1.x:
-  version "1.10.4"
-  resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-1.10.4.tgz#fa30dd75a1a19d71abff4db4c97c0bf3d74964a2"
+rc-tooltip@^3.4.3:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-3.6.0.tgz#560a507882b0cd1579ff5a5cdd2b322e19ddd91e"
   dependencies:
     babel-runtime "6.x"
-    create-react-class "^15.5.2"
     prop-types "^15.5.8"
+    rc-trigger "^2.0.1"
+
+rc-trigger@^2.0.1:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-2.1.0.tgz#127027c913acb06dfcd19a6ff02beb44445f4cb8"
+  dependencies:
+    babel-runtime "6.x"
+    create-react-class "15.x"
+    prop-types "15.x"
     rc-align "2.x"
     rc-animate "2.x"
-    rc-util "4.x"
+    rc-util "^4.1.0"
 
 rc-util@4.x, rc-util@^4.0.4:
   version "4.0.4"
@@ -5693,6 +5702,15 @@ rc-util@4.x, rc-util@^4.0.4:
   dependencies:
     add-dom-event-listener "1.x"
     babel-runtime "6.x"
+    shallowequal "^0.2.2"
+
+rc-util@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-4.1.1.tgz#9350e9c00368b50cd8fbd91775cc1cf9e2ca72b2"
+  dependencies:
+    add-dom-event-listener "1.x"
+    babel-runtime "6.x"
+    prop-types "^15.5.10"
     shallowequal "^0.2.2"
 
 rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
@@ -5759,11 +5777,12 @@ react-dom@^15.5.4:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-draggable@^2.2.6:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-2.2.6.tgz#3a806e10f2da6babfea4136be6510e89b0d76901"
+"react-draggable@^2.2.6 || ^3.0.3", react-draggable@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-3.0.3.tgz#a6f9b3a7171981b76dadecf238316925cb9eacf4"
   dependencies:
     classnames "^2.2.5"
+    prop-types "^15.5.10"
 
 react-easy-swipe@^0.0.13:
   version "0.0.13"
@@ -5784,15 +5803,15 @@ react-error-overlay@^2.0.2:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
-react-grid-layout@^0.14.6:
-  version "0.14.7"
-  resolved "https://registry.yarnpkg.com/react-grid-layout/-/react-grid-layout-0.14.7.tgz#aaa0d090007a4d482d39a95bd63c8ef12901eab4"
+react-grid-layout@0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/react-grid-layout/-/react-grid-layout-0.16.0.tgz#f74363cd134b2f8a763224d7b6287cbb68e6de05"
   dependencies:
-    classnames "^2.2.5"
+    classnames "2.x"
     lodash.isequal "^4.0.0"
-    prop-types "^15.5.8"
-    react-draggable "^2.2.6"
-    react-resizable "^1.4.0"
+    prop-types "15.x"
+    react-draggable "^3.0.3"
+    react-resizable "^1.7.5"
 
 react-input-autosize@^2.0.1:
   version "2.0.1"
@@ -5823,16 +5842,16 @@ react-redux@^5.0.5:
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
 
-react-resizable@^1.4.0:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/react-resizable/-/react-resizable-1.7.1.tgz#e8fd2c2247c9299d117fb245dbeed9c68c0e004c"
+react-resizable@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/react-resizable/-/react-resizable-1.7.5.tgz#83eb75bb3684da6989bbbf4f826e1470f0af902e"
   dependencies:
-    prop-types "^15.5.8"
-    react-draggable "^2.2.6"
+    prop-types "15.x"
+    react-draggable "^2.2.6 || ^3.0.3"
 
-react-responsive-carousel@^3.1.19:
-  version "3.1.26"
-  resolved "https://registry.yarnpkg.com/react-responsive-carousel/-/react-responsive-carousel-3.1.26.tgz#13442cca032cd9a6a829e0e38f82f732ac5fc549"
+react-responsive-carousel@3.1.28:
+  version "3.1.28"
+  resolved "https://registry.yarnpkg.com/react-responsive-carousel/-/react-responsive-carousel-3.1.28.tgz#4d7bf1afc1789e301125d96a9966245e578261ad"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.5.8"
@@ -6452,6 +6471,10 @@ shallowequal@^0.2.2:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-0.2.2.tgz#1e32fd5bcab6ad688a4812cb0cc04efc75c7014e"
   dependencies:
     lodash.keys "^3.1.2"
+
+shallowequal@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.0.2.tgz#1561dbdefb8c01408100319085764da3fcf83f8f"
 
 shebang-command@^1.2.0:
   version "1.2.0"
