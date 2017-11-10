@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -18,8 +19,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
-import { addPage } from './actions/index';
-import { config as dashboardConfig } from './dashboard';
+import { addPage, fetchDevices, fetchRooms } from './actions';
 import initMqtt from './mqtt';
 import { setDomoticzConfig } from './domoticzApi';
 
@@ -31,14 +31,24 @@ const store = createStore(
     composeEnhancers(applyMiddleware(routerMiddleware(history), ReduxThunk)),
 );
 
-setDomoticzConfig(window.config.domoticz);
+axios.get('/config.json').then((response) => {
+    const serverConfig = response.data.server;
+    const dashboardConfig = response.data.dashboard;
 
-if (window.config.mqtt) {
-    initMqtt(store, window.config.mqtt);
-}
+    if (serverConfig.domoticz) {
+        setDomoticzConfig(serverConfig.domoticz);
+        store.dispatch(fetchDevices());
+        store.dispatch(fetchRooms());
+    }
 
-store.dispatch(addPage(0, dashboardConfig));
-store.dispatch(addPage(0, dashboardConfig));
+    if (serverConfig.mqtt) {
+        initMqtt(store, serverConfig.mqtt);
+    }
+
+    dashboardConfig.forEach((page) => {
+        store.dispatch(addPage(page.roomId, page.widgets));
+    });
+});
 
 ReactDOM.render(
     <Provider store={store}>

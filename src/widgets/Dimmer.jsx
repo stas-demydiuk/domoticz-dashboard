@@ -12,18 +12,20 @@ class Dimmer extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.device.value !== this.props.device.value) {
+        if (newProps.device.value !== this.state.value) {
             this.setState({
                 value: newProps.device.value,
             });
         }
     }
 
-    onChange = (value) => {
+    onAfterChange = () => {
         const { device, dispatch } = this.props;
+        dispatch(setDeviceLevel(device.id, this.state.value + 1));
+    };
 
+    onChange = (value) => {
         this.setState({ value });
-        dispatch(setDeviceLevel(device.id, value));
     };
 
     render() {
@@ -35,7 +37,11 @@ class Dimmer extends React.Component {
                 <h2 className="widget-value">
                     {this.state.value}<span className="units">%</span>
                 </h2>
-                <Slider onChange={this.onChange} value={this.state.value} />
+                <Slider
+                    onChange={this.onChange}
+                    onAfterChange={this.onAfterChange}
+                    value={this.state.value}
+                />
             </div>
         );
     }

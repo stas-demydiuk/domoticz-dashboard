@@ -12,6 +12,7 @@ RUN yarn install
 COPY . /usr/src/dashboard/
 RUN yarn build
 
+VOLUME /usr/src/dashboard/config
 ENV NODE_ENV=production
 ENV PORT=80
 

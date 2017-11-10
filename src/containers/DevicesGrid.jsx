@@ -8,8 +8,6 @@ import Header from './Header';
 import AddPage from './dashboard/AddPage';
 
 import {
-    fetchDevices,
-    fetchRooms,
     updateLayout,
 } from '../actions';
 
@@ -29,12 +27,6 @@ class Container extends React.Component {
             editMode: false,
             selectedPage: 0,
         };
-    }
-
-    componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch(fetchDevices());
-        dispatch(fetchRooms());
     }
 
     componentWillUnmount() {
