@@ -10,12 +10,12 @@ const HOST = process.env.HOST || '0.0.0.0';
 const app = express();
 
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../build')));
 app.use(bodyParser.json());
 app.use('/dashboard', require('./dashboard'));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 app.get('/config.json', (req, res) => {
