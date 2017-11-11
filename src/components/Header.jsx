@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { refreshDevices } from '../actions';
 
 import './Header.css';
 
-export default function Header(props) {
+function Header(props) {
     return (
         <header className="header">
             <button className="btn btn-header" onClick={props.onRefresh}>
@@ -26,3 +29,15 @@ Header.propTypes = {
     onEditModeToggle: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = state => ({
+    isRefreshing: state.deviceLoading,
+});
+
+const mapDispatchToProps = dispatch => ({
+    onRefresh: () => {
+        dispatch(refreshDevices());
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

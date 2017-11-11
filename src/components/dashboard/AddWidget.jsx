@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { addWidget } from '../../actions';
 
 import './AddWidget.css';
-import WidgetModal from '../../components/dashboard/WidgetModal';
+import WidgetModal from './WidgetModal';
 
 class AddWidget extends React.Component {
     constructor() {
@@ -60,13 +60,21 @@ class AddWidget extends React.Component {
     }
 }
 
+const layoutPropType = PropTypes.shape({
+    w: PropTypes.number.isRequired,
+    h: PropTypes.number.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+}).isRequired;
+
 AddWidget.propTypes = {
     pageId: PropTypes.number.isRequired,
     layout: PropTypes.shape({
-        w: PropTypes.number.isRequired,
-        h: PropTypes.number.isRequired,
-        x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired,
+        lg: layoutPropType,
+        md: layoutPropType,
+        sm: layoutPropType,
+        xs: layoutPropType,
+        xxs: layoutPropType,
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
 };

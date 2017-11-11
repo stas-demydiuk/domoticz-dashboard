@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import DevicesGrid from './containers/DevicesGrid';
+import DevicesGrid from './components/DevicesGrid';
 
 import './App.css';
 

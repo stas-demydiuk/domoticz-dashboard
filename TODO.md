@@ -10,3 +10,5 @@
 - [x] MQTT Support (websockets)
 - [x] Make widgets accessible 
 - [ ] Test slider + MQTT
+- [ ] Error Handling
+- [ ] Move communication with domoticz to NodeJS

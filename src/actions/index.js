@@ -1,58 +1,21 @@
 import * as api from '../domoticzApi';
 
+export {
+    ADD_WIDGET,
+    UPDATE_WIDGET,
+    REMOVE_WIDGET,
+    ADD_PAGE,
+    UPDATE_LAYOUT,
+    addWidget,
+    updateWidget,
+    removeWidget,
+    addPage,
+    saveLayout,
+} from './dashboard';
+
+
 export const STATE_ON = 'On';
 export const STATE_OFF = 'Off';
-
-export const ADD_WIDGET = 'ADD_WIDGET';
-export const addWidget = (page, layout, widgetType, widgetStyle, deviceId) => ({
-    type: ADD_WIDGET,
-    payload: {
-        page,
-        widget: {
-            layout,
-            deviceId,
-            type: widgetType,
-            style: widgetStyle,
-        },
-    },
-});
-
-export const UPDATE_WIDGET = 'UPDATE_WIDGET';
-export const updateWidget = (page, widgetIndex, widgetType, widgetStyle, deviceId) => ({
-    type: UPDATE_WIDGET,
-    payload: {
-        page,
-        widgetIndex,
-        widgetType,
-        widgetStyle,
-        deviceId,
-    },
-});
-
-export const REMOVE_WIDGET = 'REMOVE_WIDGET';
-export const removeWidget = (page, widgetIndex) => ({
-    type: REMOVE_WIDGET,
-    payload: {
-        page,
-        widgetIndex,
-    },
-});
-
-export const addPage = (roomId, widgets) => ({
-    type: 'ADD_PAGE',
-    payload: {
-        roomId,
-        widgets,
-    },
-});
-
-export const updateLayout = (page, layout) => ({
-    type: 'UPDATE_LAYOUT',
-    payload: {
-        page,
-        layout,
-    },
-});
 
 export const RECEIVE_DEVICES = 'RECEIVE_DEVICES';
 export const receiveDevices = devices => ({
