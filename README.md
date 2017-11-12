@@ -5,7 +5,63 @@ This project is based on ideas of HADashboard. HADashboard was originally create
 
 <span style="color:#f78c75"> *Dashboard is in development and is not ready for production yet*</span>
 
-# Installation
+![Dashboard Screenshot](https://raw.githubusercontent.com/stas-demydiuk/domoticz-dashboard/master/screenshot.png)
+
+# Usage
+
+## Configuration
+In `config` folder inside your domoticz-dashboard directory create server.json and dashboard.json files.
+
+Example of server.json
+```json
+{
+  "domoticz": {
+    "protocol": "http",
+    "server": "your_domoticz_address:port",
+    "username": null,
+    "password": null
+  },
+  "mqtt": {
+    "server": "ws://your_mosquitto_address:9001",
+    "username": null,
+    "password": null
+  }
+}
+```
+Example of empty dashboard.json
+```json
+[{
+  "roomId":0,
+  "widgets":[]
+}]
+```
+
+## Run
+
+The easiest way to start dashboard is to use docker container.
+You can use docker or docker-compose to run the container.
+Sample of docker-compose.yml file
+```yaml
+version: '3.3'
+
+services:
+  domoticz-dashboard:
+    image: demydiuk/domoticz-dashboard
+    container_name: domoticz-dashboard
+    volumes:
+      - "./config:/usr/src/dashboard/config"
+    ports:
+      - 8080:80
+    restart: always
+```
+Simply execute this command in your domoticz-dashboard directory to start container:
+```bash
+docker-compose up -d
+```
+
+Now yor should be able to access dashboard on 8080 port.
+
+# Development
 
 ## Requirements
 
